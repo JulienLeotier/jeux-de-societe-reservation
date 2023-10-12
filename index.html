@@ -36,7 +36,7 @@
     <!-- Custom JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            fetch('/reservations.json') // Remplacez par l'URL de votre fichier JSON si différente
+            fetch('/db.json') // Remplacez par l'URL de votre fichier JSON si différente
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = document.querySelector("#calendarTable tbody");
