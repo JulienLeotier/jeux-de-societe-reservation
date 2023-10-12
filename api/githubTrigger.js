@@ -51,6 +51,12 @@ module.exports = async (req, res) => {
         res.status(500).send('Failed to fetch db.json');
         return;
     }
+    if(!data) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Invalid request body' })
+      };
+    }
 
     // Vérifier si c'est une mise à jour de jeux/date ou une réservation
     if (data.games && data.date) {
