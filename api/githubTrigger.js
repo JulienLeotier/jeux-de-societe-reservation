@@ -51,6 +51,7 @@ module.exports = async (req, res) => {
         res.status(500).send('Failed to fetch db.json');
         return;
     }
+    console.log(data)
     if(!data) {
       return {
         statusCode: 400,
