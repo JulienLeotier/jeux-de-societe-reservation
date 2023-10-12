@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Réservation</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Agenda de Réservation</h1>
+        <table class="table table-bordered" id="calendarTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Jeu de société</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les données seront injectées ici depuis le fichier JSON -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/reservations.json') // Remplacez par l'URL de votre fichier JSON si différente
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector("#calendarTable tbody");
+                    for (const date in data.dates) {
+                        const reservation = data.dates[date];
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                        <td>${date}</td>
+                        <td>
+                            <select class="form-control">
+                                <!-- Vous pouvez dynamiquement générer cette liste à partir de votre JSON aussi -->
+                                <option ${reservation.jeu === "Monopoly" ? "selected" : ""}>Monopoly</option>
+                                <option ${reservation.jeu === "Uno" ? "selected" : ""}>Uno</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">Réserver</button>
+                        </td>
+                    `;
+                        tableBody.appendChild(row);
+                    }
+                });
+        });
+    </script>
+
+</body>
+
+</html>
