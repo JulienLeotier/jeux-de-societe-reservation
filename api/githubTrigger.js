@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
     // Obtenir le contenu actuel de db.json
     let dbContent;
     try {
-        const response = await fetch('https://raw.githubusercontent.com/JulienLeotier/jeux-de-societe-reservation/main/db.json');
+        const response = await fetch('https://raw.githubusercontent.com/JulienLeotier/jeux-de-societe-reservation/master/db.json');
         dbContent = await response.json();
     } catch (error) {
         res.status(500).send('Failed to fetch db.json');
