@@ -46,12 +46,11 @@ module.exports = async (req, res) => {
     let dbContent;
     try {
         const response = await fetch('https://raw.githubusercontent.com/JulienLeotier/jeux-de-societe-reservation/master/db.json');
-        dbContent = await response.json();
+        dbContent = JSON.parse(response);
     } catch (error) {
         res.status(500).send('Failed to fetch db.json');
         return;
     }
-    console.log(data)
     if(!data) {
       return {
         statusCode: 400,
